@@ -4,8 +4,11 @@ pipeline {
     stages {
         stage('Docker构建') {
             steps {
-                sh "docker rm -f Excalidraw"
-                sh "docker image rm xujiaji/excalidraw"
+                try {
+                    sh "docker rm -f Excalidraw"
+                    sh "docker image rm xujiaji/excalidraw"
+                }
+                catch(Exception ignore) {}
                 sh "docker build -t xujiaji/excalidraw ."
             }
         }
